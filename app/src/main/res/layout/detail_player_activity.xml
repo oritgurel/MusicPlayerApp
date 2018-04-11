@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/demo_background"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/trans_black">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/margin_def">
+
+            <TextView
+                android:id="@+id/detail_song_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/detail_song_name"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                tools:text="Song Name"/>
+            <TextView
+                android:id="@+id/detail_artist_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below="@id/detail_song_name"
+                android:textSize="@dimen/detail_artist_name"
+                android:textStyle="bold"
+                android:textColor="@color/grey"
+                tools:text="Artist Name"/>
+            <RelativeLayout
+                android:id="@+id/seek_bar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_artist_name">
+
+            <app.minimize.com.seek_bar_compat.SeekBarCompat
+                android:id="@+id/seek_bar_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp"
+                android:maxHeight="300sp"
+                app:progressBackgroundColor="@color/trans_grey"
+                app:progressColor="@color/grey"
+                app:thumbAlpha="1.0"
+                app:thumbColor="@color/grey"/>
+
+                <TextView
+                    android:id="@+id/start_timing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/seek_bar_detail"
+                    android:layout_alignParentLeft="true"
+                    tools:text="start timing"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:id="@+id/end_timing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/seek_bar_detail"
+                    android:layout_alignParentRight="true"
+                    tools:text="end timing"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/trasport_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_def"
+                android:layout_marginTop="@dimen/margin_def"
+                android:layout_below="@id/seek_bar_container">
+
+            <Button
+                android:id="@+id/add_fav_detail_butt"
+                android:layout_width="@dimen/icon_24_def_dimen"
+                android:layout_height="@dimen/icon_24_def_dimen"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_favorite_white_holo_24dp"
+                />
+                <Button
+                    android:id="@+id/prev_song_detail_butt"
+                    android:layout_width="@dimen/icon_24_def_dimen"
+                    android:layout_height="@dimen/icon_24_def_dimen"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_prev_track_detail_16dp"
+                    />
+
+                <Button
+                    android:id="@+id/play_pause_song_detail_butt"
+                    android:layout_width="53dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="@drawable/play_butt_detail"
+                    />
+
+                <Button
+                    android:id="@+id/next_song_detail_butt"
+                    android:layout_width="@dimen/icon_24_def_dimen"
+                    android:layout_height="@dimen/icon_24_def_dimen"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_next_track_detail_16"
+                    />
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

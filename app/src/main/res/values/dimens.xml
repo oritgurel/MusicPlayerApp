@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="detail_song_name">28sp</dimen>
+    <dimen name="detail_artist_name">22sp</dimen>
+    <dimen name="margin_def">16dp</dimen>
+    <dimen name="icon_24_def_dimen">24dp</dimen>
+</resources>

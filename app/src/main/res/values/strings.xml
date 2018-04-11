@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MusicPlayerApp</string>
+    <string name="text_favorites">favorites</string>
+    <string name="text_schedules">schedule</string>
+    <string name="text_music">music</string>
+    <string name="pause">Pause</string>
+    <string name="play">Play</string>
+</resources>
