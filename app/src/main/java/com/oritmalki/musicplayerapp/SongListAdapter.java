@@ -20,7 +20,6 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongHo
 
     List<Song> songs;
     SongListAdapterCallback callback;
-    int lastCheckedPosition = -1;
 
     public SongListAdapter(List<Song> songs, SongListAdapterCallback callback) {
         this.songs = songs;
@@ -35,6 +34,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongHo
 
     @Override
     public void onBindViewHolder(final SongHolder holder, final int position) {
+
         holder.songName.setText(songs.get(position).getSongTitle());
         holder.artistName.setText(songs.get(position).getArtistName());
         holder.timing.setText(String.valueOf(songs.get(position).getTiming()));
@@ -45,9 +45,6 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongHo
             public void onClick(View v) {
                 callback.onSongListItemSelected(holder.songName, position);
                 SongListPlayerActivity.playListener.onClick(v);
-//                lastCheckedPosition = position;
-//                v.setFocusable(position == lastCheckedPosition);
-//                notifyDataSetChanged();
             }
         });
         holder.favIc.setOnClickListener(new View.OnClickListener() {

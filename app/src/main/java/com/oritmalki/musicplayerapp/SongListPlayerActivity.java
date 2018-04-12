@@ -1,11 +1,14 @@
 package com.oritmalki.musicplayerapp;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,9 +27,12 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     int lastCheckedPosition = -1;
     Button playPauseMainButt;
     Button playPauseBarButt;
+    ViewPager viewPagerBar;
+    SongListAdapter adapter;
     boolean isPlaying = false;
     public static View.OnClickListener playListener;
     List<Song> songs = new ArrayList<>();
+    List<PagerSwipFragment> swapFragments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         recyclerView = findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        final SongListAdapter adapter = new SongListAdapter(songs, this);
+        adapter = new SongListAdapter(songs, this);
         recyclerView.setAdapter(adapter);
 
         playPauseBarButt = findViewById(R.id.pager_play);
@@ -68,6 +74,9 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         playPauseMainButt.setOnClickListener(playListener);
         playPauseBarButt.setOnClickListener(playListener);
 
+        setupViewPagerBar();
+
+
     }
 
     //get selected item info from adapter
@@ -75,6 +84,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     public void onSongListItemSelected(View song, int position) {
         this.selectedSongName = song;
         this.selectedSongPosition = position;
+        viewPagerBar.setCurrentItem(position);
 
         //making it possible to play one song at a time
         if (previouslySelectedSongName != null) {
@@ -102,4 +112,39 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         playPauseBarButt.setBackground(getResources().getDrawable(R.drawable.ic_play_track_detail_16));
 
     }
+
+    public void setupViewPagerBar() {
+        viewPagerBar = findViewById(R.id.viewpager);
+        for (Song song : songs) {
+            PagerSwipFragment swapFragment = PagerSwipFragment.getInstance(song);
+            swapFragments.add(swapFragment);
+        }
+        ViewPagerAdapter swapAdapter = new ViewPagerAdapter(getSupportFragmentManager(), swapFragments);
+        viewPagerBar.setAdapter(swapAdapter);
+
+        viewPagerBar.addOnPageChangeListener(new OnPageChangeListener() {
+
+            //this is for selecting item in recyclerview when swiped on viewPagerBar
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                recyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                    @Override public boolean onPreDraw() {
+                        recyclerView.findViewHolderForAdapterPosition(position).itemView.performClick();
+                        recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        return true; }
+                });
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
 }

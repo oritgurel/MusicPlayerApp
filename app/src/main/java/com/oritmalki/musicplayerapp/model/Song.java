@@ -1,10 +1,12 @@
 package com.oritmalki.musicplayerapp.model;
 
+import java.io.Serializable;
+
 /**
  * Created by user2 on 03/04/2018.
  */
 
-public class Song {
+public class Song implements Serializable {
 
     String songTitle;
     String artistName;
