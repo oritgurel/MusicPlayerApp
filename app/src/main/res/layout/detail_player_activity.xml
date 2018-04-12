@@ -4,6 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/demo_background"
+                android:layoutDirection="ltr"
                 xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
@@ -42,34 +43,34 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detail_artist_name">
 
-            <app.minimize.com.seek_bar_compat.SeekBarCompat
-                android:id="@+id/seek_bar_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="16dp"
-                android:maxHeight="300sp"
-                app:progressBackgroundColor="@color/trans_grey"
-                app:progressColor="@color/grey"
-                app:thumbAlpha="1.0"
-                app:thumbColor="@color/grey"/>
+            <!--<app.minimize.com.seek_bar_compat.SeekBarCompat-->
+                <!--android:id="@+id/seek_bar_detail"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:maxHeight="300dp"-->
+                <!--app:progressBackgroundColor="@color/trans_grey"-->
+                <!--app:progressColor="@color/grey"-->
+                <!--app:thumbAlpha="1.0"-->
+                <!--app:thumbColor="@color/grey"/>-->
 
-                <TextView
-                    android:id="@+id/start_timing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/seek_bar_detail"
-                    android:layout_alignParentLeft="true"
-                    tools:text="start timing"
-                    android:textColor="@color/white"/>
-                <TextView
-                    android:id="@+id/end_timing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/seek_bar_detail"
-                    android:layout_alignParentRight="true"
-                    tools:text="end timing"
-                    android:textColor="@color/white"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/start_timing"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@id/seek_bar_detail"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--tools:text="start timing"-->
+                    <!--android:textColor="@color/white"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/end_timing"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@id/seek_bar_detail"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--tools:text="end timing"-->
+                    <!--android:textColor="@color/white"/>-->
             </RelativeLayout>
             <LinearLayout
                 android:id="@+id/trasport_container"

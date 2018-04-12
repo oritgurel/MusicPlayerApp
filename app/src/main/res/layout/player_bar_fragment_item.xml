@@ -7,6 +7,7 @@
               android:background="@color/dark_grey">
 
     <LinearLayout
+        android:id="@+id/song_ber_text_wrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">

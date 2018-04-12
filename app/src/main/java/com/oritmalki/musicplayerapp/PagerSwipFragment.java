@@ -1,5 +1,6 @@
 package com.oritmalki.musicplayerapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,22 +12,23 @@ import android.widget.TextView;
 
 import com.oritmalki.musicplayerapp.model.Song;
 
-import java.io.Serializable;
 
 
-
-public class PagerSwipFragment extends Fragment {
+public class PagerSwipFragment extends Fragment implements View.OnClickListener {
 
     Song song;
     TextView songNameBar;
     TextView artistNameBar;
+    ViewGroup songBarTextWrapper;
+
+    public static final String SONG_INFO = "SONG_INFO";
 
     final static String ARGS_SELECTED_SONG = "args_selected_song";
 
     public static PagerSwipFragment getInstance(Song song) {
         PagerSwipFragment pagerSwapFragment = new PagerSwipFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ARGS_SELECTED_SONG, (Serializable) song);
+        bundle.putSerializable(ARGS_SELECTED_SONG, song);
         pagerSwapFragment.setArguments(bundle);
         return pagerSwapFragment;
     }
@@ -48,6 +50,8 @@ public class PagerSwipFragment extends Fragment {
 
         songNameBar = view.findViewById(R.id.song_name_bar);
         artistNameBar = view.findViewById(R.id.artist_name_bar);
+        songBarTextWrapper = view.findViewById(R.id.song_ber_text_wrapper);
+        songBarTextWrapper.setOnClickListener(this);
 
         songNameBar.setText(song.getSongTitle());
         artistNameBar.setText(song.getArtistName());
@@ -57,4 +61,11 @@ public class PagerSwipFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getContext(), DetailPlayerActivity.class);
+        intent.putExtra(SONG_INFO, song);
+        startActivity(intent);
+
+    }
 }

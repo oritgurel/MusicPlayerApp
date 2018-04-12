@@ -28,7 +28,7 @@
             android:layout_height="200dp"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
-            app:layout_scrollFlags="scroll|snap"
+            app:layout_scrollFlags="scroll"
             >
             ​
             <ImageView
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:minHeight="55dp"
             app:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:layout_scrollFlags="scroll|enterAlways"
             style="@style/ToolBarWithNavigationBack"
             />
         ​
@@ -58,7 +58,7 @@
             android:orientation="vertical"
             android:paddingTop="8dp"
             android:gravity="center"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:layout_scrollFlags="scroll|enterAlways"
             >
             ​
             <TextView
@@ -113,6 +113,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="110dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </android.support.v7.widget.RecyclerView>
