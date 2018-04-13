@@ -9,14 +9,20 @@ import java.io.Serializable;
 public class Song implements Serializable {
 
     String songTitle;
-    String artistName;
+    Artist artist;
     double timing;
-    String imgUri;
+    int imgUri;
     String path;
 
-    public Song(String title, String artistName) {
+    public Song(String title, Artist artist, int imgUri) {
         this.songTitle = title;
-        this.artistName = artistName;
+        this.artist = artist;
+        this.imgUri = imgUri;
+    }
+
+    public Song(String title, Artist artist) {
+        this.songTitle = title;
+        this.artist = artist;
     }
 
     public String getSongTitle() {
@@ -27,12 +33,12 @@ public class Song implements Serializable {
         this.songTitle = songTitle;
     }
 
-    public String getArtistName() {
-        return artistName;
+    public Artist getArtist() {
+        return artist;
     }
 
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
     public double getTiming() {
@@ -43,11 +49,11 @@ public class Song implements Serializable {
         this.timing = timing;
     }
 
-    public String getImgUri() {
+    public int getImgUri() {
         return imgUri;
     }
 
-    public void setImgUri(String imgUri) {
+    public void setImgUri(int imgUri) {
         this.imgUri = imgUri;
     }
 

@@ -3,9 +3,20 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/demo_background"
-                android:layoutDirection="ltr"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                android:layoutDirection="ltr">
+
+    <ImageView
+        android:id="@+id/background_image_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/demo_background"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/detail_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,11 +48,13 @@
                 android:textStyle="bold"
                 android:textColor="@color/grey"
                 tools:text="Artist Name"/>
+
             <RelativeLayout
                 android:id="@+id/seek_bar_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detail_artist_name">
+
 
             <!--<app.minimize.com.seek_bar_compat.SeekBarCompat-->
                 <!--android:id="@+id/seek_bar_detail"-->
@@ -72,6 +85,7 @@
                     <!--tools:text="end timing"-->
                     <!--android:textColor="@color/white"/>-->
             </RelativeLayout>
+
             <LinearLayout
                 android:id="@+id/trasport_container"
                 android:layout_width="match_parent"

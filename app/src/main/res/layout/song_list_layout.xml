@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                tools:text="Album name"
+                android:text="My Playlist"
                 />
             ​
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-                android:text="subtitle_mup"
+                android:text="By Me"
                 android:textColor="@android:color/white"
                 />
             ​

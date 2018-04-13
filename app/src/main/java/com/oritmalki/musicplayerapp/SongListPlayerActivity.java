@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.oritmalki.musicplayerapp.model.DemoSongList;
@@ -20,6 +21,13 @@ import java.util.List;
 
 public class SongListPlayerActivity extends AppCompatActivity implements SongListAdapterCallback {
 
+    //TODO add favorite list
+    //TODO ChoosePlaylist/Album activity
+    //TODO animations: button pressed, image parallax fade
+    //TODO fix seekBar View (so it won't crash)
+    //TODO update bottom nav
+    //TODO add demo artist image resources for each song object
+
     RecyclerView recyclerView;
     View selectedSongName;
     View previouslySelectedSongName;
@@ -27,12 +35,13 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     int lastCheckedPosition = -1;
     Button playPauseMainButt;
     Button playPauseBarButt;
+    ImageView pagerSmallImage;
     ViewPager viewPagerBar;
     SongListAdapter adapter;
     boolean isPlaying = false;
     public static View.OnClickListener playListener;
     List<Song> songs = new ArrayList<>();
-    List<PagerSwipFragment> swapFragments = new ArrayList<>();
+    List<PagerSwipeFragment> swapFragments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +82,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
 
         playPauseMainButt.setOnClickListener(playListener);
         playPauseBarButt.setOnClickListener(playListener);
+        pagerSmallImage = findViewById(R.id.pager_image);
 
         setupViewPagerBar();
 
@@ -85,6 +95,9 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         this.selectedSongName = song;
         this.selectedSongPosition = position;
         viewPagerBar.setCurrentItem(position);
+        pagerSmallImage.setImageResource(songs.get(position).getArtist().getArtistImageUri());
+
+
 
         //making it possible to play one song at a time
         if (previouslySelectedSongName != null) {
@@ -116,7 +129,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     public void setupViewPagerBar() {
         viewPagerBar = findViewById(R.id.viewpager);
         for (Song song : songs) {
-            PagerSwipFragment swapFragment = PagerSwipFragment.getInstance(song);
+            PagerSwipeFragment swapFragment = PagerSwipeFragment.getInstance(song);
             swapFragments.add(swapFragment);
         }
         ViewPagerAdapter swapAdapter = new ViewPagerAdapter(getSupportFragmentManager(), swapFragments);

@@ -1,19 +1,20 @@
 package com.oritmalki.musicplayerapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by user2 on 03/04/2018.
  */
 
-public class Artist {
+public class Artist implements Serializable {
 
     String artistName;
     List<Song> songs;
     List<Album> albums;
-    String artistImageUri;
+    int artistImageUri;
 
-    public Artist(String artistName, String artistImageUri) {
+    public Artist(String artistName, int artistImageUri) {
         this.artistName = artistName;
         this.artistImageUri = artistImageUri;
     }
@@ -42,11 +43,11 @@ public class Artist {
         this.albums = albums;
     }
 
-    public String getArtistImageUri() {
+    public int getArtistImageUri() {
         return artistImageUri;
     }
 
-    public void setArtistImageUri(String artistImageUri) {
+    public void setArtistImageUri(int artistImageUri) {
         this.artistImageUri = artistImageUri;
     }
 }

@@ -36,7 +36,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongHo
     public void onBindViewHolder(final SongHolder holder, final int position) {
 
         holder.songName.setText(songs.get(position).getSongTitle());
-        holder.artistName.setText(songs.get(position).getArtistName());
+        holder.artistName.setText(songs.get(position).getArtist().getArtistName());
         holder.timing.setText(String.valueOf(songs.get(position).getTiming()));
         holder.rowView.setOnClickListener(new OnClickListener() {
 
