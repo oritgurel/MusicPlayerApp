@@ -16,6 +16,11 @@
 
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@layout/simple_splash_screen</item>
+
+    </style>
+
     <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/grey</item>
         <item name="textAllCaps">false</item>

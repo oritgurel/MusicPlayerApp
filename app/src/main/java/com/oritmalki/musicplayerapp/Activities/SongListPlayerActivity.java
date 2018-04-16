@@ -1,4 +1,4 @@
-package com.oritmalki.musicplayerapp;
+package com.oritmalki.musicplayerapp.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,13 +22,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.oritmalki.musicplayerapp.Adapters.SongListAdapter;
+import com.oritmalki.musicplayerapp.Adapters.ViewPagerAdapter;
+import com.oritmalki.musicplayerapp.Fragments.LibraryArtistsFragment;
+import com.oritmalki.musicplayerapp.Fragments.PagerSwipeFragment;
+import com.oritmalki.musicplayerapp.Interfaces.SongListAdapterCallback;
+import com.oritmalki.musicplayerapp.R;
 import com.oritmalki.musicplayerapp.model.DemoSongList;
 import com.oritmalki.musicplayerapp.model.Song;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.oritmalki.musicplayerapp.PagerSwipeFragment.SONG_POSITION;
+import static com.oritmalki.musicplayerapp.Fragments.PagerSwipeFragment.SONG_POSITION;
 
 public class SongListPlayerActivity extends AppCompatActivity implements SongListAdapterCallback, LibraryArtistsFragment.OnFragmentInteractionListener {
 
@@ -59,10 +65,13 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.song_list_layout);
 
-        DemoSongList.fillDemoData(songs);
+        if (songs == null || songs.size() == 0) {
+            DemoSongList.fillDemoData(songs);
+        }
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         setupBottomNav();
         recyclerView = findViewById(R.id.recyclerview);
@@ -207,15 +216,18 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
                 break;
             case R.id.menu_action_music:
                 //(now playing)
-                Intent intent = new Intent(getApplicationContext(), SongListPlayerActivity.class);
-                startActivity(intent);
+
+                if (!(this.equals(SongListPlayerActivity.class))) {
+                    Intent intent = new Intent(getApplicationContext(), SongListPlayerActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
 
         mSelectedItem = item.getItemId();
 
         // uncheck the other items.
-        for (int i = 0; i< bottomNavigationView.getMenu().size(); i++) {
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
             MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
             menuItem.setChecked(menuItem.getItemId() == item.getItemId());
         }

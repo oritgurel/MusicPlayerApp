@@ -1,4 +1,4 @@
-package com.oritmalki.musicplayerapp;
+package com.oritmalki.musicplayerapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,12 +12,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.oritmalki.musicplayerapp.Adapters.DetailViewPagerAdapter;
+import com.oritmalki.musicplayerapp.Fragments.DetailFragment;
+import com.oritmalki.musicplayerapp.R;
 import com.oritmalki.musicplayerapp.model.Song;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.oritmalki.musicplayerapp.PagerSwipeFragment.SONG_POSITION;
+import static com.oritmalki.musicplayerapp.Fragments.PagerSwipeFragment.SONG_POSITION;
 
 /**
  * Created by Orit on 10.4.2018.

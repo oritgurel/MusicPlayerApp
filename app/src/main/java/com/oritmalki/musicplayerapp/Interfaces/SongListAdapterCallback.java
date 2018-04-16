@@ -1,4 +1,4 @@
-package com.oritmalki.musicplayerapp;
+package com.oritmalki.musicplayerapp.Interfaces;
 
 import android.view.View;
 

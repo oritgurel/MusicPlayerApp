@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layoutDirection="ltr">
 
-    <include layout="@layout/detail_bkg_image_fragment" />
+    <include layout="@layout/detail_bkg_image_fragment"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/detail_view_pager"
@@ -14,8 +14,6 @@
         android:layout_height="match_parent">
 
     </android.support.v4.view.ViewPager>
-
-
 
 
     <RelativeLayout
@@ -34,19 +32,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:textSize="@dimen/detail_song_name"
                 android:textStyle="bold"
-                android:textColor="@color/white"
                 tools:text="Song Name"/>
+
             <TextView
                 android:id="@+id/detail_artist_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_below="@id/detail_song_name"
+                android:gravity="center"
+                android:textColor="@color/grey"
                 android:textSize="@dimen/detail_artist_name"
                 android:textStyle="bold"
-                android:textColor="@color/grey"
                 tools:text="Artist Name"/>
 
             <RelativeLayout
@@ -66,7 +65,7 @@
                     android:thumbTint="@color/grey"/>
 
 
-            <!--<app.minimize.com.seek_bar_compat.SeekBarCompat-->
+                <!--<app.minimize.com.seek_bar_compat.SeekBarCompat-->
                 <!--android:id="@+id/seek_bar_detail"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
@@ -79,40 +78,41 @@
                 <!--app:thumbColor="@color/grey"/>-->
 
                 <!--<TextView-->
-                    <!--android:id="@+id/start_timing"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@id/seek_bar_detail"-->
-                    <!--android:layout_alignParentLeft="true"-->
-                    <!--tools:text="start timing"-->
-                    <!--android:textColor="@color/white"/>-->
+                <!--android:id="@+id/start_timing"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/seek_bar_detail"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--tools:text="start timing"-->
+                <!--android:textColor="@color/white"/>-->
                 <!--<TextView-->
-                    <!--android:id="@+id/end_timing"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@id/seek_bar_detail"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--tools:text="end timing"-->
-                    <!--android:textColor="@color/white"/>-->
+                <!--android:id="@+id/end_timing"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/seek_bar_detail"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--tools:text="end timing"-->
+                <!--android:textColor="@color/white"/>-->
             </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/trasport_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/margin_def"
+                android:layout_below="@id/seek_bar_container"
                 android:layout_marginTop="@dimen/margin_def"
-                android:layout_below="@id/seek_bar_container">
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_def">
 
-            <Button
-                android:id="@+id/add_fav_detail_butt"
-                android:layout_width="@dimen/icon_24_def_dimen"
-                android:layout_height="@dimen/icon_24_def_dimen"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ic_favorite_white_holo_24dp"
-                />
+                <Button
+                    android:id="@+id/add_fav_detail_butt"
+                    android:layout_width="@dimen/icon_24_def_dimen"
+                    android:layout_height="@dimen/icon_24_def_dimen"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_favorite_white_holo_24dp"
+                    />
+
                 <Button
                     android:id="@+id/prev_song_detail_butt"
                     android:layout_width="@dimen/icon_24_def_dimen"
@@ -137,7 +137,6 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/ic_next_track_detail_16"
                     />
-
 
 
             </LinearLayout>
