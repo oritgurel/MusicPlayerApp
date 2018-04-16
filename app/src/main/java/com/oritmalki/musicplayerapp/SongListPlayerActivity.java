@@ -1,11 +1,20 @@
 package com.oritmalki.musicplayerapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver;
@@ -19,7 +28,9 @@ import com.oritmalki.musicplayerapp.model.Song;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongListPlayerActivity extends AppCompatActivity implements SongListAdapterCallback {
+import static com.oritmalki.musicplayerapp.PagerSwipeFragment.SONG_POSITION;
+
+public class SongListPlayerActivity extends AppCompatActivity implements SongListAdapterCallback, LibraryArtistsFragment.OnFragmentInteractionListener {
 
     //TODO add favorite list
     //TODO ChoosePlaylist/Album activity
@@ -38,10 +49,13 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     ImageView pagerSmallImage;
     ViewPager viewPagerBar;
     SongListAdapter adapter;
+    int pagerPosition = 0;
     boolean isPlaying = false;
     public static View.OnClickListener playListener;
-    List<Song> songs = new ArrayList<>();
+    public static List<Song> songs = new ArrayList<>();
     List<PagerSwipeFragment> swapFragments = new ArrayList<>();
+    private BottomNavigationView bottomNavigationView;
+    private int mSelectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +63,8 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         setContentView(R.layout.song_list_layout);
 
         DemoSongList.fillDemoData(songs);
-
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        setupBottomNav();
         recyclerView = findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -66,13 +81,11 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
                 if (selectedSongName != null) {
 
 
-
                     if (!isPlaying) {
 
                         setViewPlaying(selectedSongName);
 
-                    }
-                    else {
+                    } else {
                         setViewPause(selectedSongName);
                     }
                 }
@@ -85,7 +98,13 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         pagerSmallImage = findViewById(R.id.pager_image);
 
         setupViewPagerBar();
+        //if got here from detail activity, set the same song view that was chosen
+        if (getIntent().getExtras() != null) {
+            int position = getIntent().getExtras().getInt(SONG_POSITION);
+            viewPagerBar.setCurrentItem(position);
+            setRecyclerViewPosition(position);
 
+        }
 
     }
 
@@ -96,7 +115,6 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         this.selectedSongPosition = position;
         viewPagerBar.setCurrentItem(position);
         pagerSmallImage.setImageResource(songs.get(position).getArtist().getArtistImageUri());
-
 
 
         //making it possible to play one song at a time
@@ -111,7 +129,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     public void setViewPlaying(View view) {
         isPlaying = true;
         playPauseMainButt.setText(R.string.pause);
-        ((TextView)view).setTextColor(getResources().getColor(R.color.colorAccent));
+        ((TextView) view).setTextColor(getResources().getColor(R.color.colorAccent));
         playPauseBarButt.setBackground(getResources().getDrawable(R.drawable.ic_pause));
         lastCheckedPosition = selectedSongPosition;
         //take reference to (view of) last song  played
@@ -121,7 +139,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     public void setViewPause(View view) {
         isPlaying = false;
         playPauseMainButt.setText(R.string.play);
-        ((TextView)view).setTextColor(getResources().getColor(R.color.white));
+        ((TextView) view).setTextColor(getResources().getColor(R.color.white));
         playPauseBarButt.setBackground(getResources().getDrawable(R.drawable.ic_play_track_detail_16));
 
     }
@@ -129,7 +147,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
     public void setupViewPagerBar() {
         viewPagerBar = findViewById(R.id.viewpager);
         for (Song song : songs) {
-            PagerSwipeFragment swapFragment = PagerSwipeFragment.getInstance(song);
+            PagerSwipeFragment swapFragment = PagerSwipeFragment.getInstance(songs.indexOf(song));
             swapFragments.add(swapFragment);
         }
         ViewPagerAdapter swapAdapter = new ViewPagerAdapter(getSupportFragmentManager(), swapFragments);
@@ -145,12 +163,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
 
             @Override
             public void onPageSelected(final int position) {
-                recyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                    @Override public boolean onPreDraw() {
-                        recyclerView.findViewHolderForAdapterPosition(position).itemView.performClick();
-                        recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
-                        return true; }
-                });
+                setRecyclerViewPosition(position);
             }
 
             @Override
@@ -160,4 +173,71 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
         });
     }
 
+    public void setRecyclerViewPosition(final int position) {
+        recyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                recyclerView.findViewHolderForAdapterPosition(position).itemView.performClick();
+                recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                return true;
+            }
+        });
+        pagerPosition = position;
+    }
+
+    public void setupBottomNav() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectActivity(item);
+                return true;
+            }
+        });
+    }
+
+    private void selectActivity(MenuItem item) {
+        Fragment frag = null;
+        // init corresponding fragment
+        switch (item.getItemId()) {
+            case R.id.menu_action_search:
+                frag = LibraryArtistsFragment.newInstance();
+                break;
+            case R.id.menu_action_favorites:
+//                frag = FavoritesListFragment.newInstance();
+                break;
+            case R.id.menu_action_music:
+                //(now playing)
+                Intent intent = new Intent(getApplicationContext(), SongListPlayerActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+        mSelectedItem = item.getItemId();
+
+        // uncheck the other items.
+        for (int i = 0; i< bottomNavigationView.getMenu().size(); i++) {
+            MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
+            menuItem.setChecked(menuItem.getItemId() == item.getItemId());
+        }
+
+        updateToolbarText(item.getTitle());
+
+        if (frag != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.container, frag, frag.getTag());
+            ft.commit();
+        }
+    }
+
+    private void updateToolbarText(CharSequence text) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(text);
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

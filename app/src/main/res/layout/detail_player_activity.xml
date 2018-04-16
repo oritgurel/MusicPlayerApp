@@ -3,13 +3,10 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layoutDirection="ltr">
 
-    <ImageView
-        android:id="@+id/background_image_detail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/demo_background"/>
+    <include layout="@layout/detail_bkg_image_fragment" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/detail_view_pager"
@@ -17,6 +14,9 @@
         android:layout_height="match_parent">
 
     </android.support.v4.view.ViewPager>
+
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,6 +54,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detail_artist_name">
+
+                <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="16dp"
+                    android:maxHeight="300dp"
+                    android:progressBackgroundTint="@color/trans_grey"
+                    android:progressTint="@color/grey"
+                    android:thumbTint="@color/grey"/>
 
 
             <!--<app.minimize.com.seek_bar_compat.SeekBarCompat-->

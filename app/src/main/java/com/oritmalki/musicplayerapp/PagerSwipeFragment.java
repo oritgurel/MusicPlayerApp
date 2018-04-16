@@ -21,14 +21,14 @@ public class PagerSwipeFragment extends Fragment implements View.OnClickListener
     TextView artistNameBar;
     ViewGroup songBarTextWrapper;
 
-    public static final String SONG_INFO = "SONG_INFO";
+    public static final String SONG_POSITION = "SONG_POSITION";
 
-    final static String ARGS_SELECTED_SONG = "args_selected_song";
+    final static String ARGS_SELECTED_SONG_POSITION = "args_selected_song_position";
 
-    public static PagerSwipeFragment getInstance(Song song) {
+    public static PagerSwipeFragment getInstance(int position) {
         PagerSwipeFragment pagerSwapFragment = new PagerSwipeFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ARGS_SELECTED_SONG, song);
+        bundle.putInt(ARGS_SELECTED_SONG_POSITION, position);
         pagerSwapFragment.setArguments(bundle);
         return pagerSwapFragment;
     }
@@ -38,7 +38,7 @@ public class PagerSwipeFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Song song = (Song) getArguments().getSerializable(ARGS_SELECTED_SONG);
+        Song song = SongListPlayerActivity.songs.get(getArguments().getInt(ARGS_SELECTED_SONG_POSITION));
         this.song = song;
 
     }
@@ -64,7 +64,8 @@ public class PagerSwipeFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getContext(), DetailPlayerActivity.class);
-        intent.putExtra(SONG_INFO, song);
+        intent.putExtra(SONG_POSITION, getArguments().getInt(ARGS_SELECTED_SONG_POSITION));
+//       TODO intent.putExtra(SONG_POSITION, )
         startActivity(intent);
 
     }
