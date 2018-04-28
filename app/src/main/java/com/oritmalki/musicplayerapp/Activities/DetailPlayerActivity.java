@@ -35,6 +35,7 @@ public class DetailPlayerActivity extends AppCompatActivity {
     ViewPager detailPager;
     Button nextSong;
     Button prevSong;
+    Button backButt;
     ViewPager.OnClickListener onClickListener;
     List<Song> songs = new ArrayList<>(SongListPlayerActivity.songs);
     List<DetailFragment> detailFragments = new ArrayList<>();
@@ -50,6 +51,7 @@ public class DetailPlayerActivity extends AppCompatActivity {
         bkgImg = findViewById(R.id.background_image_detail);
         nextSong = findViewById(R.id.next_song_detail_butt);
         prevSong = findViewById(R.id.prev_song_detail_butt);
+        backButt = findViewById(R.id.detail_back_button);
         songName.setText(song.getSongTitle());
         artistName.setText(song.getArtist().getArtistName());
         setupImageBkgPager();
@@ -68,12 +70,16 @@ public class DetailPlayerActivity extends AppCompatActivity {
                         if (detailPager.getCurrentItem() != 0)
                             detailPager.setCurrentItem(detailPager.getCurrentItem() - 1);
                         break;
+                    case R.id.detail_back_button:
+                        onBackPressed();
+                        break;
                 }
             }
         };
 
         nextSong.setOnClickListener(onClickListener);
         prevSong.setOnClickListener(onClickListener);
+        backButt.setOnClickListener(onClickListener);
 
 
     }

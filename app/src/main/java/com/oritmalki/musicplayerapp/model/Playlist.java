@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Playlist {
 
-    List<Song> playlistSongs;
+    private List<Song> playlistSongs;
 
     public Playlist(List<Song> playlistSongs) {
         this.playlistSongs = playlistSongs;

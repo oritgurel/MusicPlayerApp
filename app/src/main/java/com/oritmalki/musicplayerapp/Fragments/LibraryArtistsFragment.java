@@ -69,7 +69,7 @@ public class LibraryArtistsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library_artists, container, false);
-        recyclerView = view.findViewById(R.id.artists_recyclerview);
+        recyclerView = view.findViewById(R.id.recyclerview);
         artistsAdapter = new ArtistsAdapter(artists);
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(artistsAdapter);

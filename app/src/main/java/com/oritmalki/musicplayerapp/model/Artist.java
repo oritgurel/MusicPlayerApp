@@ -9,10 +9,10 @@ import java.util.List;
 
 public class Artist implements Serializable {
 
-    String artistName;
-    List<Song> songs;
-    List<Album> albums;
-    int artistImageUri;
+    private String artistName;
+    private List<Song> songs;
+    private List<Album> albums;
+    private int artistImageUri;
 
     public Artist(String artistName, int artistImageUri) {
         this.artistName = artistName;

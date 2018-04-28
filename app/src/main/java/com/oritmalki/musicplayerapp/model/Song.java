@@ -8,11 +8,12 @@ import java.io.Serializable;
 
 public class Song implements Serializable {
 
-    String songTitle;
-    Artist artist;
-    double timing;
-    int imgUri;
-    String path;
+    private String songTitle;
+    private Artist artist;
+    private double timing;
+    private int imgUri;
+    private String path;
+    private boolean isFav;
 
     public Song(String title, Artist artist, int imgUri) {
         this.songTitle = title;
@@ -63,5 +64,13 @@ public class Song implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public boolean isFav() {
+        return isFav;
+    }
+
+    public void setFav(boolean fav) {
+        isFav = fav;
     }
 }

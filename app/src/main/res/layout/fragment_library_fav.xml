@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/fav_list_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Favorite List:"
+        android:layout_margin="16dp"
+        android:textColor="@color/white"
+        android:gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/fav_back_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="left"
+        android:layout_margin="16dp"
+        android:background="@drawable/ic_back_button"/>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_below="@id/fav_list_title_tv"
+             android:background="@color/black">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fav_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</FrameLayout>
+</RelativeLayout>

@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.oritmalki.musicplayerapp.Adapters.SongListAdapter;
 import com.oritmalki.musicplayerapp.Adapters.ViewPagerAdapter;
+import com.oritmalki.musicplayerapp.Fragments.FavoritesListFragment;
 import com.oritmalki.musicplayerapp.Fragments.LibraryArtistsFragment;
 import com.oritmalki.musicplayerapp.Fragments.PagerSwipeFragment;
 import com.oritmalki.musicplayerapp.Interfaces.SongListAdapterCallback;
@@ -36,7 +37,7 @@ import java.util.List;
 
 import static com.oritmalki.musicplayerapp.Fragments.PagerSwipeFragment.SONG_POSITION;
 
-public class SongListPlayerActivity extends AppCompatActivity implements SongListAdapterCallback, LibraryArtistsFragment.OnFragmentInteractionListener {
+public class SongListPlayerActivity extends AppCompatActivity implements SongListAdapterCallback, LibraryArtistsFragment.OnFragmentInteractionListener, FavoritesListFragment.OnFavFragmentInteractionListener {
 
     //TODO add favorite list
     //TODO ChoosePlaylist/Album activity
@@ -212,7 +213,7 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
                 frag = LibraryArtistsFragment.newInstance();
                 break;
             case R.id.menu_action_favorites:
-//                frag = FavoritesListFragment.newInstance();
+                frag = FavoritesListFragment.newInstance();
                 break;
             case R.id.menu_action_music:
                 //(now playing)
@@ -250,6 +251,25 @@ public class SongListPlayerActivity extends AppCompatActivity implements SongLis
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onFavFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getFragmentManager().popBackStack();
+        }
 
     }
 }

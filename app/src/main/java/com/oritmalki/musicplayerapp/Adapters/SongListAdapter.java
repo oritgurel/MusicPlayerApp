@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.oritmalki.musicplayerapp.R;
-import com.oritmalki.musicplayerapp.Interfaces.SongListAdapterCallback;
 import com.oritmalki.musicplayerapp.Activities.SongListPlayerActivity;
+import com.oritmalki.musicplayerapp.Fragments.FavoritesListFragment;
+import com.oritmalki.musicplayerapp.Interfaces.SongListAdapterCallback;
+import com.oritmalki.musicplayerapp.R;
 import com.oritmalki.musicplayerapp.model.Song;
 
 import java.util.List;
@@ -41,6 +42,13 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongHo
         holder.songName.setText(songs.get(position).getSongTitle());
         holder.artistName.setText(songs.get(position).getArtist().getArtistName());
         holder.timing.setText(String.valueOf(songs.get(position).getTiming()));
+
+        if (songs.get(position).isFav()) {
+            holder.favIc.setImageResource(R.drawable.ic_favorite_primary_24dp);
+        } else {
+            holder.favIc.setImageResource(R.drawable.ic_favorite_primary_holo_24dp);
+        }
+
         holder.rowView.setOnClickListener(new OnClickListener() {
 
             //get info from selected item
@@ -53,7 +61,17 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongHo
         holder.favIc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (v.isPressed())
+                //if heart is empty, fill it and put song into the list
+                if (! songs.get(position).isFav()) {
+                    songs.get(position).setFav(true);
+                    holder.favIc.setImageResource(R.drawable.ic_favorite_primary_24dp);
+                    FavoritesListFragment.favSongList.add(songs.get(position));
+                    //else, change icon to hollow heart and remove song from fav list
+                } else {
+                    songs.get(position).setFav(false);
+                    holder.favIc.setImageResource(R.drawable.ic_favorite_primary_holo_24dp);
+                    FavoritesListFragment.favSongList.remove(songs.get(position));
+                }
                 //TODO create animation when an item is clicked as feedback for user
             }
         });
@@ -82,6 +100,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongHo
             timing = itemView.findViewById(R.id.song_timing);
             favIc = itemView.findViewById(R.id.add_favorite);
             rowView = itemView.findViewById(R.id.row_view);
+
 
         }
     }

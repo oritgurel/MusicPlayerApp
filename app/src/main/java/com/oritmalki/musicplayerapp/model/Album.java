@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Album {
 
-    String albumTitle;
-    List<Song> albumSongs;
-    Artist artist;
+    private String albumTitle;
+    private List<Song> albumSongs;
+    private Artist artist;
 
     public Album(String albumTitle, Artist artist) {
         this.albumTitle = albumTitle;
