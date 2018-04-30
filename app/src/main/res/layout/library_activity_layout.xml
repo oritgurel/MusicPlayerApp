@@ -20,24 +20,6 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="55dp"/>
 
-
-    <!--<android.support.design.widget.TabItem-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Playlists"/>-->
-
-
-    <!--<android.support.design.widget.TabItem-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Artists"/>-->
-
-    <!--<android.support.design.widget.TabItem-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Favorites"/>-->
-
-
     <include
         layout="@layout/bottom_navigation_layout"/>
 
